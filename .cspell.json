@@ -3,13 +3,14 @@
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/master/cspell.schema.json",
   "language": "en",
   "words": [
+    // Contributor that has done comments
+    "fauh",
+    // Rest of "foreign" words
     "asmaraku",
     "bitbybit",
     "bbb",
-    "bitjson",
-    "bitauth",
+    "rabbitmq",
     "cimg",
-    "circleci",
     "codecov",
     "commitlint",
     "dependabot",
