@@ -1,6 +1,6 @@
 {
   "name": "@bitbybit-labs/lib-amqp",
-  "version": "0.0.2-beta.0",
+  "version": "0.0.2-beta.1",
   "description": "AMQP helper with auto-connect, and other life-saver features.",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
