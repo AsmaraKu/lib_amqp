@@ -1,5 +1,5 @@
 {
-  "name": "@asmaraku/lib-amqp",
+  "name": "@bitbybit-labs/lib-amqp",
   "version": "0.0.2-beta.0",
   "description": "AMQP helper with auto-connect, and other life-saver features.",
   "main": "build/main/index.js",
