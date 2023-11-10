@@ -45,8 +45,8 @@
     "cov:send": "run-s cov:lcov && codecov",
     "cov:check": "nyc report && nyc check-coverage --lines 100 --functions 100 --branches 100",
     "doc": "run-s doc:html && open-cli build/docs/index.html",
-    "doc:html": "typedoc src/ --exclude **/*.spec.ts --out build/docs",
-    "doc:json": "typedoc src/ --exclude **/*.spec.ts --json build/docs/typedoc.json",
+    "doc:html": "typedoc src/ src/consumer/ src/publisher/ --exclude **/*.spec.ts --out build/docs",
+    "doc:json": "typedoc src/ src/consumer/ src/publisher/ --exclude **/*.spec.ts --json build/docs/typedoc.json",
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
     "version": "standard-version",
     "reset-hard": "git clean -dfx && git reset --hard && npm i",
@@ -54,6 +54,18 @@
   },
   "engines": {
     "node": ">=16"
+  },
+  "dependencies": {
+    "amqp-connection-manager": "^4.1.14",
+    "amqplib": "^0.10.3"
+  },
+  "peerDependencies": {
+    "zod": "^3.22.4"
+  },
+  "peerDependenciesMeta": {
+    "zod": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@ava/typescript": "^4.1.0",
@@ -115,9 +127,5 @@
     "exclude": [
       "**/*.spec.js"
     ]
-  },
-  "dependencies": {
-    "amqp-connection-manager": "^4.1.14",
-    "amqplib": "^0.10.3"
   }
 }
