@@ -15,6 +15,43 @@ export type ConsumeOptions<MsgType extends z.ZodTypeAny> = {
   logger?: LoggerType;
 };
 
+/**
+ * Consume queue safely.
+ *
+ * This function is a wrapper over your own function that handles the message from this queue. Before `func` is called
+ * it will be parsed and validated according to your zod schema passed on the options.
+ *
+ * ### Example
+ *
+ * Here's a simple example of usage.
+ *
+ * ```typescript
+ * import z from "zod";
+ * import { safelyConsumeQueueChannel } from "@bitbybit-labs/amqp-lib/consumer";
+ *
+ * // ... instantiate your connection and channel here
+ *
+ * await safelyConsumeQueueChannel(
+ *    queue,
+ *    { schema: z.object({ ping: z.string() }) },
+ *    async (msg) => {
+ *        // strong typing on msg, and you can be assured that it will be valid
+ *        console.log(msg.ping);
+ *
+ *        // If it returns without any error it will acknowledge it
+ *        if (msg.ping === "ping") return;
+ *        // This is highly unadvised to throw here, as it would result in the message being requeued
+ *        // thus, please only throw error on error caused by an intermediary error(s)
+ *        else throw new Error("not ping");
+ *    }
+ * )
+ * ```
+ *
+ * @param queue QueueChannel made by `createQueueChannel`
+ * @param options Options around schema and logger used
+ * @param func This function will be called every time there's a new message consumed from the queue
+ * @returns void
+ */
 export const safelyConsumeQueueChannel = async <MsgType extends z.ZodTypeAny>(
   queue: Readonly<QueueChannel>,
   options: Readonly<ConsumeOptions<MsgType>>,
