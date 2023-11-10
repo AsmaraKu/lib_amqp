@@ -11,6 +11,7 @@
     "bbb",
     "rabbitmq",
     "fanout",
+    "prefetch",
     "cimg",
     "codecov",
     "commitlint",
