@@ -4,6 +4,7 @@ import amqp, {
 } from 'amqp-connection-manager';
 
 import { isAmqpUrlValid } from '../helper/urls/validate';
+import { LoggerType } from '../types/logger';
 
 /**
  * All the required objects to manage connection to AMQP cluster.
@@ -23,6 +24,7 @@ export type ConnectionOptions =
     // NOTE(fauh45): This could be the type of ConnectionUrl (consist of object of options, or url with options, or just string).
     // It doesn't translate to types well, and we're only using connection string for now.
     url: string | string[];
+    logger?: LoggerType;
   };
 
 /**
@@ -60,7 +62,12 @@ export const createConnection = (
   // NOTE(fauh45): should we check opts here? I feel like it should be already checked from the connection options
   const { url, ...restOfOpts } = opts;
 
+  const log = opts.logger ?? console;
   const manager = amqp.connect(url, restOfOpts);
+
+  manager.on('connect', log.debug);
+  manager.on('disconnect', log.debug);
+  manager.on('connectFailed', log.warn);
 
   return { manager };
 };
