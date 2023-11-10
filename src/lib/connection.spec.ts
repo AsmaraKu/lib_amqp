@@ -81,6 +81,9 @@ test('should replace default config', (t) => {
 /**
  * Create & Destroying Connection Test
  *
+ * This doesn't really test the reconnect capability of the library, as for now it's already handled by `amqp-connection-manager`.
+ * It's already tested here [amqp-connection-manager test](https://github.com/jwalton/node-amqp-connection-manager/blob/599d31f01d2e13d6a049bd7645e39e5de99d0293/test/AmqpConnectionManagerTest.ts#L200)
+ *
  * WARN: START THE RABBITMQ LOCALLY FIRST USING `docker compose`.
  *
  * NOTE(fauh45): We should mock the library here for sure...
